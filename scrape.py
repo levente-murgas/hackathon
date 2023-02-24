@@ -1,45 +1,57 @@
 import requests
 import json
-import socket
 
-socket.getaddrinfo('localhost', 8080)
 api_key = "RGAPI-60fe1387-7dff-489e-8403-eb737a5a7083"
-summoner_name = "krisz2010"
-region = "eune"
+summoner_name = "Graaland"
+region_code = "eun1"
+region = "europe"
 queue = "RANKED_SOLO_5x5"  # or "RANKED_FLEX_SR" for Flex queue
 
+class Summoner:
+    def __init__(self, summoner_id: str, puuid: str, region_code: str):
+        self.summoner_id = summoner_id
+        self.puuid = puuid
+        self.region_code = region_code
+    
+    def get_match_list(self):
+        # Get match list from summoner ID
+        url = f"https://europe.api.riotgames.com/lol/match/v5/matches/by-puuid/{self.puuid}/ids?start=0&count=20&api_key={api_key}"
+        response = requests.get(url)
+        matchlist_data = json.loads(response.text)
+        return matchlist_data
 
-# Get summoner ID from summoner name
-url = f"https://{region}.api.riotgames.com/lol/summoner/v4/summoners/by-name/{summoner_name}?api_key={api_key}"
-response = requests.get(url)
-summoner_data = json.loads(response.text)
-summoner_id = summoner_data["accountId"]
+    def get_tier(self):
+        # # Get summoner's league entry for a specific queue
+        url = f"https://{self.region_code}.api.riotgames.com/lol/league/v4/entries/by-summoner/{self.summoner_id}?api_key={api_key}"
+        response = requests.get(url)
+        rank_data = json.loads(response.text)
+        # # Extract relevant information from rank_data
+        if len(rank_data) > 0:
+            return rank_data[0]["tier"]
+        else:
+            print(f"{summoner_name} is currently unranked in {queue}.")
 
-# Get match list from summoner ID
-url = f"https://{region}.api.riotgames.com/lol/match/v4/matchlists/by-account/{summoner_id}?endIndex=10&api_key={api_key}"
-response = requests.get(url)
-matchlist_data = json.loads(response.text)
+        
 
-# Get match details from match ID
-for match in matchlist_data["matches"]:
-    match_id = match["gameId"]
-    url = f"https://{region}.api.riotgames.com/lol/match/v4/matches/{match_id}?api_key={api_key}"
+def get_summoner(_region_code, summoner_name, api_key):
+    # Get summoner ID from summoner name
+    url = f"https://{region_code}.api.riotgames.com/lol/summoner/v4/summoners/by-name/{summoner_name}?api_key={api_key}"
+    response = requests.get(url)
+    summoner_data = json.loads(response.text)
+    puuid = summoner_data["puuid"]
+    summoner_id = summoner_data["id"]
+    return Summoner(summoner_id=summoner_id,puuid=puuid, region_code=_region_code)
+
+
+
+def get_match_details(match_id: str):
+    # # Get match details from match ID
+    url = f"https://{region}.api.riotgames.com/lol/match/v5/matches/{match_id}?api_key={api_key}"
     response = requests.get(url)
     match_data = json.loads(response.text)
-    # Extract relevant information from match_data
-    # Store the data in a database or a file
+    return match_data
 
-
-# Get summoner's league entry for a specific queue
-url = f"https://{region}.api.riotgames.com/lol/league/v4/entries/by-summoner/{summoner_id}?queue={queue}&api_key={api_key}"
-response = requests.get(url)
-rank_data = json.loads(response.text)
-
-# Extract relevant information from rank_data
-if len(rank_data) > 0:
-    tier = rank_data[0]["tier"]
-    division = rank_data[0]["rank"]
-    lp = rank_data[0]["leaguePoints"]
-    print(f"{summoner_name} is currently in {tier} {division}, with {lp} LP.")
-else:
-    print(f"{summoner_name} is currently unranked in {queue}.")
+# # Code sample
+krisz = get_summoner(region_code,summoner_name=summoner_name,api_key=api_key)
+matches = krisz.get_match_list()
+print(get_match_details(matches[0]))
