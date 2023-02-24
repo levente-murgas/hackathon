@@ -1,5 +1,6 @@
 import requests
 import json
+from bs4 import BeautifulSoup
 
 api_key = "RGAPI-60fe1387-7dff-489e-8403-eb737a5a7083"
 summoner_name = "Graaland"
@@ -52,6 +53,21 @@ def get_match_details(match_id: str):
     return match_data
 
 # # Code sample
-krisz = get_summoner(region_code,summoner_name=summoner_name,api_key=api_key)
-matches = krisz.get_match_list()
-print(get_match_details(matches[0]))
+# krisz = get_summoner(region_code,summoner_name=summoner_name,api_key=api_key)
+# matches = krisz.get_match_list()
+# print(get_match_details(matches[0]))
+
+
+# Send a request to the webpage
+url = 'https://www.op.gg/leaderboards/tier'
+response = requests.get(url, headers={'User-Agent': 'Mozilla/5.0'})
+
+# Use BeautifulSoup to parse the HTML content of the page
+soup = BeautifulSoup(response.content, 'html.parser')
+
+# Find all the elements with the class name "summoner-name"
+summoner_names = soup.find_all('strong', {'class': 'summoner-name'})
+
+# Print the results
+for name in summoner_names:
+    print(name.text)
