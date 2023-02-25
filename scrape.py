@@ -32,8 +32,6 @@ class Summoner:
         else:
             print(f"{summoner_name} is currently unranked in {queue}.")
 
-        
-
 def get_summoner(_region_code, summoner_name, api_key):
     # Get summoner ID from summoner name
     url = f"https://{region_code}.api.riotgames.com/lol/summoner/v4/summoners/by-name/{summoner_name}?api_key={api_key}"
@@ -43,8 +41,6 @@ def get_summoner(_region_code, summoner_name, api_key):
     summoner_id = summoner_data["id"]
     return Summoner(summoner_id=summoner_id,puuid=puuid, region_code=_region_code)
 
-
-
 def get_match_details(match_id: str):
     # # Get match details from match ID
     url = f"https://{region}.api.riotgames.com/lol/match/v5/matches/{match_id}?api_key={api_key}"
@@ -53,26 +49,34 @@ def get_match_details(match_id: str):
     return match_data
 
 def serialize_match(match: dict):
-    with open("sample.json", "w") as outfile:
+    match_id = match["metadata"]["matchId"]
+    with open(f"{match_id}.json", "w") as outfile:
         json.dump(match, outfile)
 
 # # Code sample
-krisz = get_summoner(region_code,summoner_name=summoner_name,api_key=api_key)
-matches = krisz.get_match_list()
-serialize_match(get_match_details(matches[0]))
+# krisz = get_summoner(region_code,summoner_name=summoner_name,api_key=api_key)
+# matches = krisz.get_match_list()
+# serialize_match(get_match_details(matches[0]))
 
+# @page_start included
+# @page_end excluded
+def scrape_summoner_names(page_start=0,page_end=1):
+    summoner_names = []
+    for pages in range(page_start,page_end):
+        # Send a request to the webpage
+        url = 'https://www.op.gg/leaderboards/tier'
+        if pages > 0:
+            page = pages + 1
+            url = f'https://www.op.gg/leaderboards/tier?page={page}'
+        response = requests.get(url, headers={'User-Agent': 'Mozilla/5.0'})
 
-# # Send a request to the webpage
-# url = 'https://www.op.gg/leaderboards/tier'
-# response = requests.get(url, headers={'User-Agent': 'Mozilla/5.0'})
+        # Use BeautifulSoup to parse the HTML content of the page
+        soup = BeautifulSoup(response.content, 'html.parser')
 
-# # Use BeautifulSoup to parse the HTML content of the page
-# soup = BeautifulSoup(response.content, 'html.parser')
+        # Find all the elements with the class name "summoner-name"
+        for element in soup.find_all('strong', {'class': 'summoner-name'}):
+            summoner_names.append(element.text)
 
-# # Find all the elements with the class name "summoner-name"
-# summoner_names = soup.find_all('strong', {'class': 'summoner-name'})
+    return summoner_names
 
-# # Print the results
-# for name in summoner_names:
-#     print(name.text)
-
+print(scrape_summoner_names(0,2))
