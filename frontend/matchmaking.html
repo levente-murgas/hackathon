@@ -6,34 +6,30 @@
   <link rel="stylesheet" href="matchmaking.css">
 </head>
 <body>
-  <!-- header -->
-  <header>
-    <div class="logo"></div>
-  </header>
-  
-  <!-- side menu -->
   <div class="side-menu">
-    <div class="logo"></div>
+    <a href="index.html"><div class="logo"></div></a>
     <ul>
-      <li><a href="#">Tournaments</a></li>
-      <li><a href="#">Matchmaking</a></li>
-      <li><a href="#">Leaderboards</a></li>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="tournaments.html">Tournaments</a></li>
+        <li><a href="#" class="disabled">Matchmaking</a></li>
+        <li><a href="leaderboard.html">Leaderboards</a></li>
     </ul>
   </div>
   
-  <!-- main content -->
   <div class="main-content">
     <div class="profile-menu">
-      <a href="#">My Profile</a>
-    </div>
+        <a href="#">MetaPlayer</a>
+        <img class="profile" src="profile.webp" alt="profile picture">
+      </div>
     <div class="matchmaking">
-      <h2>Enter Your Score</h2>
-      <form>
-        <input type="text" placeholder="Score">
-        <button type="submit">Submit</button>
-      </form>
-      
-      <h2>Matchmaking Results</h2>
+        <div id="formhead">
+            <h2>Enter Your Score</h2>
+            <form>
+              <input type="text" placeholder="Score">
+              <button type="submit">Search opponents</button>
+            </form>
+        </div>
+    <div id="table-box">
       <table>
         <thead>
           <tr>
@@ -43,9 +39,9 @@
           </tr>
         </thead>
         <tbody>
-          <!-- empty table initially, will be filled dynamically -->
         </tbody>
       </table>
+    </div>
     </div>
   </div>
   

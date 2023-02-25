@@ -3,6 +3,7 @@ const tableBody = document.querySelector('tbody');
 
 form.addEventListener('submit', (event) => {
   event.preventDefault();
+  document.getElementById("table-box").style.opacity = 1;
   
   // get the player's score from the form
   const scoreInput = document.querySelector('input[type="text"]');
@@ -10,6 +11,14 @@ form.addEventListener('submit', (event) => {
   
   // generate some sample data for the matchmaking results
   const data = [
+    { name: 'Player 1', score: 900, matches: 16 },
+    { name: 'Player 1', score: 900, matches: 16 },
+    { name: 'Player 1', score: 900, matches: 16 },
+    { name: 'Player 1', score: 900, matches: 16 },
+    { name: 'Player 1', score: 900, matches: 16 },
+    { name: 'Player 1', score: 900, matches: 16 },
+    { name: 'Player 1', score: 900, matches: 16 },
+    { name: 'Player 1', score: 900, matches: 16 },
     { name: 'Player 1', score: 900, matches: 16 },
     { name: 'Player 2', score: 850, matches: 14 },
     { name: 'Player 3', score: 800, matches: 12 },

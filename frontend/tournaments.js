@@ -1558,56 +1558,24 @@ jsonData = `{"data":[{
 ]}
 `;
 
-data = JSON.parse(jsonData).data;
-const table = document.getElementById('myTable');
-const headerRow = table.insertRow();
-const idHeader = headerRow.insertCell();
-const scoreHeader = headerRow.insertCell();
-const matchesHeader = headerRow.insertCell();
-
-data.forEach(obj => {
-  const row = table.insertRow();
-  const idCell = row.insertCell();
-  const scoreCell = row.insertCell();
-  const matchesCell = row.insertCell();
-  if (obj.id.length > 10) {
-    idCell.textContent = obj.id.substring(0, 10) + '...';
-  } else {
-  idCell.textContent = obj.id;
-    }
-  scoreCell.textContent = Math.round(obj.ELO);
-  matchesCell.textContent = obj.matches_played;
-  //alert(obj.score)
-});
-
-/*
 document.addEventListener('DOMContentLoaded', () => {
-// Read the CSV file
-      const fileInput = document.createElement('input');
-      fileInput.type = 'file';
-      fileInput.addEventListener('load', () => {
-        const file = fileInput.files[0];
-        const reader = new FileReader();
-        reader.onload = () => {
-          const csvData = reader.result;
 
-          // Parse the CSV data
-          const parsedData = Papa.parse(csvData, { header: true }).data;
+    data = JSON.parse(jsonData).data;
+    const table = document.getElementById('myTable');
 
-          // Create the HTML table
-          const table = document.getElementById('myTable');
-          const tbody = table.getElementsByTagName('tbody')[0];
-          parsedData.forEach(rowData => {
-            const row = tbody.insertRow();
-            Object.values(rowData).forEach(cellData => {
-              const cell = row.insertCell();
-              cell.appendChild(document.createTextNode(cellData));
-            });
-          });
-        };
-        reader.readAsText(file);
-      });
-      document.body.appendChild(fileInput);
-      alert('Please select a CSV file to upload.');
+    data.forEach(obj => {
+    const row = table.insertRow();
+    const idCell = row.insertCell();
+    const scoreCell = row.insertCell();
+    const matchesCell = row.insertCell();
+    if (obj.id.length > 10) {
+        idCell.textContent = obj.id.substring(0, 10) + '...';
+    } else {
+    idCell.textContent = obj.id;
+        }
+    scoreCell.textContent = Math.round(obj.ELO);
+    matchesCell.textContent = obj.matches_played;
+    //alert(obj.score)
+    });
+
 });
-*/
