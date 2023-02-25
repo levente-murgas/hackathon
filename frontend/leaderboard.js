@@ -1,4 +1,4 @@
-jsonData1 = `{"data":[{
+jsonData = `{"data":[{
     "id": "OmVHmi0-WZNJiYI26uV_l2OjE2WZ6-3zqNVYdQ3SbgcbccA1MPRTuh6dwYeW1VkWB9V49tTKEWMT0w",
     "ELO": 2191.7814353226,
     "matches_played": 700.0
@@ -1558,57 +1558,23 @@ jsonData1 = `{"data":[{
 ]}
 `;
 
-jsonData2 = jsonData1;
-
-const maxnumberofrows = 30;
-
 document.addEventListener('DOMContentLoaded', () => {
 
-    data = JSON.parse(jsonData1).data;
-    const table1 = document.getElementById('table1');
+    data = JSON.parse(jsonData).data;
+    const table = document.getElementById('myTable');
 
-    i = 0;
     data.forEach(obj => {
-        if (i > maxnumberofrows) {
-            return;
+    const row = table.insertRow();
+    const idCell = row.insertCell();
+    const scoreCell = row.insertCell();
+    const matchesCell = row.insertCell();
+    if (obj.id.length > 20) {
+        idCell.textContent = obj.id.substring(0, 20) + '...';
+    } else {
+    idCell.textContent = obj.id;
         }
-        i++;
-        const row = table1.insertRow();
-        const idCell = row.insertCell();
-        const scoreCell = row.insertCell();
-        const matchesCell = row.insertCell();
-        if (obj.id.length > 20) {
-            idCell.textContent = obj.id.substring(0, 20) + '...';
-        } else {
-        idCell.textContent = obj.id;
-            }
-        scoreCell.textContent = Math.round(obj.ELO);
-        matchesCell.textContent = obj.matches_played;
+    scoreCell.textContent = Math.round(obj.ELO);
+    matchesCell.textContent = obj.matches_played;
     });
-
-
-
-    data = JSON.parse(jsonData2).data;
-    const table2 = document.getElementById('table2');
-
-    i = 0;
-    data.forEach(obj => {
-        if (i > maxnumberofrows) {
-            return;
-        }
-        i++;
-        const row = table2.insertRow();
-        const idCell = row.insertCell();
-        const scoreCell = row.insertCell();
-        const matchesCell = row.insertCell();
-        if (obj.id.length > 20) {
-            idCell.textContent = obj.id.substring(0, 20) + '...';
-        } else {
-        idCell.textContent = obj.id;
-            }
-        scoreCell.textContent = Math.round(obj.ELO);
-        matchesCell.textContent = obj.matches_played;
-    });
-
 
 });

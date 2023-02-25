@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Tournaments - gamerank</title>
-  <link rel="stylesheet" href="tournaments.css">
+  <title>Leaderboard - gamerank</title>
+  <link rel="stylesheet" href="leaderboard.css">
   <link rel="stylesheet" href="bg.css">
   </style>
 </head>
@@ -12,9 +12,9 @@
       <a href="index.html"><div class="logo"></div></a>
       <ul>
         <li><a href="index.html">Home</a></li>
-        <li><a href="#" class="disabled">Tournaments</a></li>
+        <li><a href="tournaments.html">Tournaments</a></li>
         <li><a href="matchmaking.html">Matchmaking</a></li>
-        <li><a href="leaderboard.html">Leaderboards</a></li>
+        <li><a href="#" class="disabled">Leaderboards</a></li>
       </ul>
     </div>
     <div class="main-content">
@@ -26,10 +26,7 @@
       <div class="leaderboard">
         <div class="header-container">
           <div class="header-nested-container">
-            <h2>February Tournament</h2>
-          </div>
-          <div class="header-nested-container">
-            <h2>Week 7, 2023 Tournament</h2>
+            <h2>All-time leaderboard</h2>
           </div>
         </div>
         <div class="table-container">
@@ -41,24 +38,13 @@
                 <th>Match #</th>
               </tr>
             </thead>
-            <tbody id="table1">
+            <tbody id="myTable">
                 </tbody>
-          </table>
-          <table>
-            <thead>
-              <tr>
-                <th>Player Name</th>
-                <th>Score</th>
-                <th>Match #</th>
-              </tr>
-            </thead>
-            <tbody id="table2">
-            </tbody>
           </table>
         </div>
 </div>
 </div>
-<script src="tournaments.js"></script>
+<script src="leaderboard.js"></script>
 <script src="bg.js"></script>
 </body>
 </html>
