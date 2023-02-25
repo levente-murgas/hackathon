@@ -1,5 +1,3 @@
-// app.js
-
 const form = document.querySelector('form');
 const tableBody = document.querySelector('tbody');
 
