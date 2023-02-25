@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Matchmaking</title>
+  <link rel="stylesheet" href="tournaments.css">
+  <link rel="stylesheet" href="matchmaking.css">
+</head>
+<body>
+  <!-- header -->
+  <header>
+    <div class="logo"></div>
+  </header>
+  
+  <!-- side menu -->
+  <div class="side-menu">
+    <div class="logo"></div>
+    <ul>
+      <li><a href="#">Tournaments</a></li>
+      <li><a href="#">Matchmaking</a></li>
+      <li><a href="#">Leaderboards</a></li>
+    </ul>
+  </div>
+  
+  <!-- main content -->
+  <div class="main-content">
+    <div class="profile-menu">
+      <a href="#">My Profile</a>
+    </div>
+    <div class="matchmaking">
+      <h2>Enter Your Score</h2>
+      <form>
+        <input type="text" placeholder="Score">
+        <button type="submit">Submit</button>
+      </form>
+      
+      <h2>Matchmaking Results</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Player Name</th>
+            <th>Score</th>
+            <th>Match #</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- empty table initially, will be filled dynamically -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  <script src="matchmaking.js"></script>
+</body>
+</html>
