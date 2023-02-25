@@ -82,8 +82,9 @@ def scrape_summoner_names(page_start=0,page_end=1):
 
     return summoner_names
 
-for summoner_name in scrape_summoner_names(489,490):
-    summoner = get_summoner(region_code,summoner_name=summoner_name,api_key=api_key)
-    matches = summoner.get_match_list()
-    for match in matches:
-        serialize_match(get_match_details(match_id=match))
+def scrape_matches_via_api(page_start=0,page_end=1):
+    for summoner_name in scrape_summoner_names(page_start=page_start,page_end=page_end):
+        summoner = get_summoner(region_code,summoner_name=summoner_name,api_key=api_key)
+        matches = summoner.get_match_list()
+        for match in matches:
+            serialize_match(get_match_details(match_id=match))

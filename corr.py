@@ -2,6 +2,7 @@ import pandas as pd
 import json
 import os
 import matplotlib.pyplot as plt
+import numpy as np
 
 def get_field_values(json_obj, field_name):
     """
@@ -21,43 +22,74 @@ def get_field_values(json_obj, field_name):
     return result
 
 records = []
+
 for filename in os.listdir("data\matches"):
+    loser_deaths = 0
+    winner_deaths = 0
+    loser_kills = 0
+    winner_kills = 0
+    loser_heal = 0
+    winner_heal = 0
+    winner_goldEarned = 0
+    loser_goldEarned = 0
     with open(f'data\matches\{filename}', encoding="utf-8") as f:
         data = json.load(f)
     participants = get_field_values(data, 'participants')    
     if len(participants[0]) != 10:
         continue
-    loser_team_kills = 0
-    winner_team_kills = 0
+
     for player in participants[1]:
         if get_field_values(player, 'win')[0] == True:
-            winner_team_kills += get_field_values(player, 'kills')[0]
+            winner_kills += get_field_values(player, 'kills')[0]
+            winner_deaths += get_field_values(player, 'deaths')[0]
+            winner_heal += get_field_values(player, 'totalHeal')[0]
+            winner_goldEarned += get_field_values(player, 'goldEarned')[0]
         else:
-            loser_team_kills += get_field_values(player, 'kills')[0]
-    records.append([os.path.splitext(filename)[0], winner_team_kills, "Yes"])
-    records.append([os.path.splitext(filename)[0], loser_team_kills, "No"])
+            loser_kills += get_field_values(player, 'kills')[0]
+            loser_deaths += get_field_values(player, 'deaths')[0]
+            loser_heal += get_field_values(player, 'totalHeal')[0]
+            loser_goldEarned += get_field_values(player, 'goldEarned')[0]
 
-df = pd.DataFrame(records,columns=['match_id','kill_count','win'])
+    records.append([os.path.splitext(filename)[0], winner_goldEarned, "Yes"])
+    records.append([os.path.splitext(filename)[0], loser_goldEarned, "No"])
 
-# filter dataframe by kill_count >= 7
-df = df[df['kill_count'] >= 7]
+df = pd.DataFrame(records,columns=['match_id','goldEarned','win'])
 
-df = df.sort_values(by=['kill_count'], ascending=True)
 
+df = df.sort_values(by=['goldEarned'], ascending=True)
+print(df)
+df['goldEarned'] = df['goldEarned'] // 1000
+
+# filter dataframe by goldEarned >= 30
+df = df[df['goldEarned'] >= 30]
+
+
+print(df)
 # group by kill_count and sum wins and losses
-grouped = df.groupby('kill_count')['win'].value_counts().unstack(fill_value=0)
+df = df.groupby('goldEarned')['win'].value_counts().unstack(fill_value=0)
 
+print(df)
 # add percentage of wins column
-grouped['win_percentage'] = grouped['Yes'] / (grouped['Yes'] + grouped['No'])
+df['win_percentage'] = df['Yes'] / (df['Yes'] + df['No'])
+print(df)
 
-# filter groups with less than 2 matches
-grouped_filtered = grouped[grouped.sum(axis=1) >= 15]
+# filter groups with less than 15 matches
+df = df[df.sum(axis=1) >= 3]
+print(df)
 
+
+
+# # calculate correlation between kill_count and win_percentage
+corr = np.corrcoef(df.index, df['win_percentage'])[0, 1]
+print(corr)
+
+# print(grouped_filtered)
 # plot data
-plt.plot(grouped_filtered.index, grouped_filtered['win_percentage'], 'o-')
-plt.xlabel('Kill Count')
+plt.plot(df.index, df['win_percentage'], 'o-')
+plt.xlabel('Total Heal')
 plt.ylabel('Win Percentage')
-plt.title('Win Percentage by Kill Count')
+plt.title('Win Percentage by Total Heal')
 plt.show()
 
-grouped_filtered.to_csv("kills_to_win.csv")
+
+df.to_csv("goldEarned_to_win.csv")
