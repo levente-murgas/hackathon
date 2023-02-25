@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>gamerank</title>
+  <style>
+    /* reset default styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    /* set background color */
+    body {
+        background-image: linear-gradient(to bottom right, #1c6658, #120f22);
+        background-color: #212121;
+    }
+    
+    /* center logo and buttons */
+    .container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    
+    /* style logo */
+    .logo {
+      width: 950px;
+      height: 200px;
+      background-image: url('gamerank_logo_transp.png');
+      background-size: cover;
+      background-position: center;
+      margin-bottom: 80px;
+    }
+    
+    /* style buttons */
+    .btn {
+      display: inline-block;
+      padding: 15px 30px;
+      width: 200px;
+      text-align: center;
+      margin: 10px;
+      border-radius: 50px;
+      background-image: linear-gradient(to right, #FF512F, #DD2476);
+      color: #FFFFFF;
+      font-size: 20px;
+      text-decoration: none;
+      transition: transform 0.3s ease;
+      font-family: Bahnschrift;
+    }
+    
+    .btn:hover {
+      transform: scale(1.1);
+    }
+    
+    /* media query for smaller screens */
+    @media only screen and (max-width: 768px) {
+      /* adjust logo size and image */
+      .logo {
+        width: 200px;
+        height: 200px;
+        background-image: url('https://example.com/logo-medium.png');
+      }
+      
+      /* display buttons in a row */
+      .btn {
+        margin: 10px 5px;
+      }
+    }
+    
+    /* media query for even smaller screens */
+    @media only screen and (max-width: 480px) {
+      /* adjust logo size and image */
+      .logo {
+        width: 150px;
+        height: 150px;
+        background-image: url('https://example.com/logo-small.png');
+      }
+      
+      /* display buttons in a row */
+      .btn {
+        margin: 10px 2.5px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="logo"></div>
+    <div>
+      <a href="tournaments.html" class="btn">Tournaments</a>
+      <a href="#" class="btn">Matchmaking</a>
+      <a href="#" class="btn">Ranking</a>
+    </div>
+  </div>
+</body>
+</html>

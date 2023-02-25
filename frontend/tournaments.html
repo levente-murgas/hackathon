@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Tournaments - Gamer Website</title>
+  <style>
+    /* reset default styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    /* set background color and font family */
+    body {
+        background-image: linear-gradient(to bottom right, #1c6658, #120f22);
+      font-family: Bahnschrift;
+      height: 100%;
+    }
+    
+    /* set logo styles */
+    .logo {
+      width: 200px;
+      height: 200px;
+      background-image: url('gamerank_logo_transp_nosmalltext.png');
+      background-size: cover;
+        background-position: center;
+      margin: -50px auto;
+    }
+    
+    /* set side menu styles */
+    .side-menu {
+    background-color: #212121;
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 250px;
+      box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+      z-index: 1;
+    }
+
+    .side-menu a {
+        display: block;
+        padding: 10px 20px;
+        color: #212121;
+        text-decoration: none;
+        font-size: 20px;
+        transition: background-color 0.1s ease;
+      border-radius: 20px;
+      background-image: linear-gradient(to right, #FF512F, #DD2476);
+      color: #FFFFFF;
+      margin: 20px;
+      transition: opacity 0.3s ease;
+    }
+
+    .side-menu a:hover {
+      opacity: 0.7;
+    }
+    
+    /* set main content styles */
+    .main-content {
+      margin-left: 250px;
+      padding: 20px;
+      color: #FFFFFF;
+    }
+    
+    /* set profile menu styles */
+    .profile-menu {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background-color: #FFFFFF;
+      padding: 10px;
+      border-radius: 10px;
+      box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+    }
+    
+    /* set leaderboard styles */
+    .leaderboard {
+      margin-top: 30px;
+    }
+    
+    .leaderboard h2 {
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+    
+    .leaderboard table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      text-align: center;
+    }
+    
+    .leaderboard th,
+    .leaderboard td {
+      padding: 10px;
+      border: 1px solid #FFFFFF;
+    }
+    
+    .leaderboard th {
+      background-color: #DD2476;
+      color: #FFFFFF;
+      font-weight: 700;
+    }
+    
+    .leaderboard td {
+      background-color: #FFFFFF;
+      color: #212121;
+    }
+  </style>
+</head>
+<body>
+    <div class="side-menu">
+      <div class="logo"></div>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="#">Matchmaking</a></li>
+        <li><a href="#">Leaderboards</a></li>
+      </ul>
+    </div>
+    <!-- main content -->
+    <div class="main-content">
+      <div class="profile-menu">
+        <a href="#">My Profile</a>
+      </div>
+      <div class="leaderboard">
+        <h2>Most Viewed Tournaments</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Player Name</th>
+              <th>Score</th>
+              <th>Match #</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Player 1</td>
+              <td>1000</td>
+              <td>20</td>
+            </tr>
+            <tr>
+              <td>Player 2</td>
+              <td>950</td>
+              <td>18</td>
+            </tr>
+            <tr>
+              <td>Player 3</td>
+              <td>900</td>
+              <td>16</td>
+            </tr>
+            <tr>
+              <td>Player 4</td>
+              <td>850</td>
+              <td>14</td>
+            </tr>
+            <tr>
+                <td>Player 5</td>
+                <td>800</td>
+                <td>12</td>
+              </tr>
+              <tr>
+                <td>Player 5</td>
+                <td>800</td>
+                <td>12</td>
+              </tr>
+              <tr>
+                <td>Player 5</td>
+                <td>800</td>
+                <td>12</td>
+              </tr>
+              <tr>
+                <td>Player 5</td>
+                <td>800</td>
+                <td>12</td>
+              </tr>
+              <tr>
+                <td>Player 5</td>
+                <td>800</td>
+                <td>12</td>
+              </tr>
+              <tr>
+                <td>Player 5</td>
+                <td>800</td>
+                <td>12</td>
+              </tr>
+              </tbody>
+        </table>
+        <h2>Top Players</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Player Name</th>
+        <th>Score</th>
+        <th>Match #</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Player 1</td>
+        <td>1500</td>
+        <td>30</td>
+      </tr>
+      <tr>
+        <td>Player 2</td>
+        <td>1450</td>
+        <td>28</td>
+      </tr>
+      <tr>
+        <td>Player 3</td>
+        <td>1400</td>
+        <td>26</td>
+      </tr>
+      <tr>
+        <td>Player 4</td>
+        <td>1350</td>
+        <td>24</td>
+      </tr>
+      <td>Player 2</td>
+      <td>1450</td>
+      <td>28</td>
+    </tr>
+    <tr>
+      <td>Player 3</td>
+      <td>1400</td>
+      <td>26</td>
+    </tr>
+    <tr>
+      <td>Player 4</td>
+      <td>1350</td>
+      <td>24</td>
+    </tr>
+    <tr>
+        <td>Player 5</td>
+        <td>1300</td>
+        <td>22</td>
+      </tr>
+            <tr>
+        <td>Player 5</td>
+        <td>1300</td>
+        <td>22</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</div>
+</body>
+</html>
