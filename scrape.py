@@ -49,14 +49,17 @@ def get_match_details(match_id: str):
     return match_data
 
 def serialize_match(match: dict):
-    match_id = match["metadata"]["matchId"]
-    with open(f"{match_id}.json", "w") as outfile:
-        json.dump(match, outfile)
+    try:
+        match_id = match["metadata"]["matchId"]
+        with open(f"data\matches\{match_id}.json", "w") as outfile:
+            json.dump(match, outfile)
+    except:
+        pass
 
-# # Code sample
+# Code sample
 # krisz = get_summoner(region_code,summoner_name=summoner_name,api_key=api_key)
 # matches = krisz.get_match_list()
-# serialize_match(get_match_details(matches[0]))
+# serialize_match(get_match_details(matches[1]))
 
 # @page_start included
 # @page_end excluded
@@ -79,4 +82,9 @@ def scrape_summoner_names(page_start=0,page_end=1):
 
     return summoner_names
 
-print(scrape_summoner_names(0,2))
+def scrape_matches_via_api(page_start=0,page_end=1):
+    for summoner_name in scrape_summoner_names(page_start=page_start,page_end=page_end):
+        summoner = get_summoner(region_code,summoner_name=summoner_name,api_key=api_key)
+        matches = summoner.get_match_list()
+        for match in matches:
+            serialize_match(get_match_details(match_id=match))
