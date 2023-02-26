@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Tournaments - gamerank</title>
+  <link rel="stylesheet" href="tournaments.css">
+  <link rel="stylesheet" href="bg.css">
+  <link rel="icon" type="image/png" href="favicon2.png">
+  </style>
+</head>
+<body>
+    <div class="side-menu">
+      <a href="index.html"><div class="logo"></div></a>
+      <div class="navigation">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="#" class="disabled">Tournaments</a></li>
+          <li><a href="matchmaking.html">Matchmaking</a></li>
+          <li><a href="leaderboard.html">Leaderboard</a></li>
+        </ul>
+      </div>
+      <div class="games">
+        <ul>
+          <li><a href="#" class="gameslink"><img src="logo_lol.png"></a></li>
+          <li><a href="#" class="gameslink"><img src="logo_csgo.png"></a></li>
+          <li><a href="#" class="gameslink"><img src="logo_pubg.png"></a></li>
+          <li><a href="#" class="gameslink"><img src="logo_tft.png"></a></li>
+        </ul>
+      </div>
+      </div>
+    <div class="main-content">
+        <canvas id="canvas"></canvas>
+        <div class="profile-menu">
+        <a href="#">MetaPlayer</a>
+        <img class="profile" src="profile.webp" alt="profile picture">
+      </div>
+      <div class="leaderboard">
+        <div class="header-container">
+          <div class="header-nested-container">
+            <h2><img src="left-arrow.png" id="left" class="arrow">February Tournament<img src="right-arrow.png" id="right" class="arrow"></h2>
+          </div>
+          <div class="header-nested-container">
+            <h2>Week 7, 2023 Tournament</h2>
+          </div>
+        </div>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Rank</th>
+                <th>Player Name</th>
+                <th>Score</th>
+                <th>Match #</th>
+              </tr>
+            </thead>
+            <tbody id="table1">
+                </tbody>
+          </table>
+          <table>
+            <thead>
+              <tr>
+                <th>Rank</th>
+                <th>Player Name</th>
+                <th>Score</th>
+                <th>Match #</th>
+              </tr>
+            </thead>
+            <tbody id="table2">
+            </tbody>
+          </table>
+        </div>
+</div>
+</div>
+<script src="tournaments.js"></script>
+<script src="bg.js"></script>
+</body>
+</html>

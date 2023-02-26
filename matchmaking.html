@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Matchmaking - gamerank</title>
+  <link rel="stylesheet" href="tournaments.css">
+  <link rel="stylesheet" href="matchmaking.css">
+  <link rel="stylesheet" href="bg.css">
+  <link rel="icon" type="image/png" href="favicon2.png">
+</head>
+<body id="body">
+  <div class="side-menu">
+    <a href="index.html"><div class="logo"></div></a>
+    <div class="navigation">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="tournaments.html">Tournaments</a></li>
+        <li><a href="#" class="disabled">Matchmaking</a></li>
+        <li><a href="leaderboard.html">Leaderboard</a></li>
+      </ul>
+    </div>
+    <div class="games">
+      <ul>
+        <li><a href="#" class="gameslink" id="lol"><img src="logo_lol.png"></a></li>
+        <li><a href="#" class="gameslink" id="csgo"><img src="logo_csgo.png"></a></li>
+        <li><a href="#" class="gameslink" id="pubg"><img src="logo_pubg.png"></a></li>
+        <li><a href="#" class="gameslink" id="tft"><img src="logo_tft.png"></a></li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="main-content">
+    <canvas id="canvas"></canvas>
+    <div class="profile-menu">
+        <a href="#">MetaPlayer</a>
+        <img class="profile" src="profile.webp" alt="profile picture">
+      </div>
+    <div class="matchmaking">
+        <div id="formhead">
+            <h2>Enter Your Score</h2>
+            <form>
+              <input type="text" placeholder="Score">
+              <button type="submit">Search opponents</button>
+            </form>
+        </div>
+    <div id="table-box">
+      <table>
+        <thead>
+          <tr>
+            <th>Index</th>
+            <th>Player Name</th>
+            <th>ELO</th>
+            <th>Match #</th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+    </div>
+    </div>
+  </div>
+  
+  <script src="matchmaking.js"></script>
+    <script src="bg.js"></script>
+</body>
+</html>
