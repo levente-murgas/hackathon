@@ -137,6 +137,11 @@ img.arrow{
   margin: 0 30px 0 30px;
   vertical-align: middle;
   display: inline;
+  cursor: pointer;
+}
+
+#left{
+  opacity: 0.3;
 }
 
 .header-container h2 {
