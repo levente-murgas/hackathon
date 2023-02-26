@@ -63,9 +63,8 @@ df['goldEarned'] = df['goldEarned'] // 1000
 # filter dataframe by goldEarned >= 30
 df = df[df['goldEarned'] >= 30]
 
-
 print(df)
-# group by kill_count and sum wins and losses
+# group by goldEarned and sum wins and losses
 df = df.groupby('goldEarned')['win'].value_counts().unstack(fill_value=0)
 
 print(df)
@@ -77,18 +76,16 @@ print(df)
 df = df[df.sum(axis=1) >= 3]
 print(df)
 
-
-
-# # calculate correlation between kill_count and win_percentage
+# # calculate correlation between goldEarned and win_percentage
 corr = np.corrcoef(df.index, df['win_percentage'])[0, 1]
 print(corr)
 
 # print(grouped_filtered)
 # plot data
 plt.plot(df.index, df['win_percentage'], 'o-')
-plt.xlabel('Total Heal')
+plt.xlabel('Gold Earned')
 plt.ylabel('Win Percentage')
-plt.title('Win Percentage by Total Heal')
+plt.title('Win Percentage by Gold Earned')
 plt.show()
 
 

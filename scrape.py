@@ -1,22 +1,24 @@
 import requests
 import json
+import time
+import pandas as pd
 from bs4 import BeautifulSoup
 
-api_key = "RGAPI-60fe1387-7dff-489e-8403-eb737a5a7083"
+api_key = "RGAPI-f6c0f89d-2d02-416c-b0d7-03044c6a4cbd"
 summoner_name = "Graaland"
 region_code = "eun1"
 region = "europe"
 queue = "RANKED_SOLO_5x5"  # or "RANKED_FLEX_SR" for Flex queue
+data = []
 
 class Summoner:
-    def __init__(self, summoner_id: str, puuid: str, region_code: str):
-        self.summoner_id = summoner_id
+    def __init__(self, puuid: str, region_code: str):
         self.puuid = puuid
         self.region_code = region_code
     
     def get_match_list(self):
         # Get match list from summoner ID
-        url = f"https://europe.api.riotgames.com/lol/match/v5/matches/by-puuid/{self.puuid}/ids?start=0&count=20&api_key={api_key}"
+        url = f"https://europe.api.riotgames.com/lol/match/v5/matches/by-puuid/{self.puuid}/ids?start=120&count=99&api_key={api_key}"
         response = requests.get(url)
         matchlist_data = json.loads(response.text)
         return matchlist_data
@@ -39,22 +41,31 @@ def get_summoner(_region_code, summoner_name, api_key):
     summoner_data = json.loads(response.text)
     puuid = summoner_data["puuid"]
     summoner_id = summoner_data["id"]
-    return Summoner(summoner_id=summoner_id,puuid=puuid, region_code=_region_code)
+    return Summoner(puuid=puuid, region_code=_region_code)
 
 def get_match_details(match_id: str):
     # # Get match details from match ID
-    url = f"https://{region}.api.riotgames.com/lol/match/v5/matches/{match_id}?api_key={api_key}"
-    response = requests.get(url)
-    match_data = json.loads(response.text)
-    return match_data
+    status_code = 0
+    while(status_code != 200):
+        url = f"https://{region}.api.riotgames.com/lol/match/v5/matches/{match_id}?api_key={api_key}"
+        response = requests.get(url)
+        status_code = response.status_code
+        if response.status_code == 200:
+            match_data = json.loads(response.text)
+            return match_data
+        elif response.status_code == 429:
+            print('Rate limit exceeded. Going to sleep.')
+            time.sleep(60)
+        else:
+            print(f'Request failed. {response.status_code} ERROR.')
 
 def serialize_match(match: dict):
     try:
         match_id = match["metadata"]["matchId"]
-        with open(f"data\matches\{match_id}.json", "w") as outfile:
+        with open(f"D:\_hackatlon\data\matches\{match_id}.json", "w") as outfile:
             json.dump(match, outfile)
     except:
-        pass
+        raise RuntimeError('Serialization failed.')
 
 # Code sample
 # krisz = get_summoner(region_code,summoner_name=summoner_name,api_key=api_key)
@@ -82,9 +93,15 @@ def scrape_summoner_names(page_start=0,page_end=1):
 
     return summoner_names
 
-def scrape_matches_via_api(page_start=0,page_end=1):
-    for summoner_name in scrape_summoner_names(page_start=page_start,page_end=page_end):
-        summoner = get_summoner(region_code,summoner_name=summoner_name,api_key=api_key)
-        matches = summoner.get_match_list()
-        for match in matches:
-            serialize_match(get_match_details(match_id=match))
+def scrape_matches_via_api():
+    cnt = 1
+    df = pd.read_csv("matches.csv",index_col=0)
+    matches = pd.Series(df['match'])
+    for match in matches:
+        serialize_match(get_match_details(match_id=match))
+        print(f'{cnt} /9800')
+        cnt += 1
+
+
+
+scrape_matches_via_api()
