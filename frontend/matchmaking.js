@@ -1558,6 +1558,23 @@ jsonData = `{"data":[{
 ]}
 `;
 
+document.getElementById("lol").addEventListener("click", function() {
+  document.getElementById("body").style.backgroundImage = "linear-gradient(to bottom right, #1c6658, #120f22)";
+  document.getElementById("table-box").style.opacity = 0;
+});
+document.getElementById("csgo").addEventListener("click", function() {
+  document.getElementById("body").style.backgroundImage = "linear-gradient(to bottom right, #66371c, #120f22)";
+  document.getElementById("table-box").style.opacity = 0;
+});
+document.getElementById("pubg").addEventListener("click", function() {
+  document.getElementById("body").style.backgroundImage = "linear-gradient(to bottom right, #521c66, #120f22)";
+  document.getElementById("table-box").style.opacity = 0;
+});
+document.getElementById("tft").addEventListener("click", function() {
+  document.getElementById("body").style.backgroundImage = "linear-gradient(to bottom right, #1c3666, #120f22)";
+  document.getElementById("table-box").style.opacity = 0;
+});
+
 data = JSON.parse(jsonData).data;
 
 const form = document.querySelector('form');

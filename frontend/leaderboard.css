@@ -40,7 +40,7 @@
     z-index: 1;
   }
   
-  .side-menu ul a {
+  .side-menu .navigation ul a {
       display: block;
       padding: 10px 20px;
       color: #212121;
@@ -61,6 +61,30 @@
   .side-menu ul a.disabled {
     opacity: 0.5;
   }
+
+  .games {
+    margin-top: 100px;
+  }
+  
+  a.gameslink{
+    display: block;
+    padding: 5px 20px 0px 20px;
+    color: #212121;
+    text-decoration: none;
+    font-size: 20px;
+    transition: background-color 0.1s ease;
+    border-radius: 20px;
+    background-color: #fff;
+    color: #FFFFFF;
+    margin: 10px 20px;
+    transition: opacity 0.3s ease;
+    text-align: center;
+  }
+  
+  .side-menu .games ul a img{
+    height: 40px;
+  }
+  
   
   /* set main content styles */
   .main-content {
