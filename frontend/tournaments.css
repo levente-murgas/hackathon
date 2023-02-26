@@ -131,6 +131,14 @@ img.profile {
   align-items: center;
 }
 
+img.arrow{
+  width: 18px;
+  height: 18px;
+  margin: 0 30px 0 30px;
+  vertical-align: middle;
+  display: inline;
+}
+
 .header-container h2 {
   font-size: 20px !important;
 }
